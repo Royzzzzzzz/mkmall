@@ -12,7 +12,7 @@ export default function SmallCard({ data }) {
         </div>
         <div className="">
           <p>{title}</p>
-          <h3 className="text-2xl font-bold">400</h3>
+          <h3 className="text-2xl font-bold">{numbers}</h3>
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ export default function LargeCard({ data }) {
     >
       <Layers />
       <h4>{data.period}</h4>
-      <h2 className="text-3xl lg:text-3xl">{data.sales}원</h2>
+      <h2 className="text-3xl lg:text-3xl">{data.sales}</h2>
     </div>
   );
 }
