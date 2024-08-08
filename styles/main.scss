@@ -5,3 +5,9 @@
 body {
   min-height: 100vh;
 }
+/* styles.css */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
