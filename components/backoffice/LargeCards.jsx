@@ -23,11 +23,6 @@ export default function LargeCards() {
       color: "bg-yellow-500", // 사용자 친화적인 색상으로 변경
     },
     {
-      period: "저번달 주문건",
-      sales: faker.number.int({ min: 500000, max: 2000000 }),
-      color: "bg-red-500", // 사용자 친화적인 색상으로 변경
-    },
-    {
       period: "총 주문건",
       sales: faker.number.int({ min: 1000000, max: 10000000 }),
       color: "bg-purple-500", // 사용자 친화적인 색상으로 변경

@@ -52,8 +52,10 @@ export default function CustomDataTable() {
   }
 
   return (
-    <div className="relative mt-4 overflow-x-auto shadow-md sm:rounded-lg">
-      <h2 className="mt-4 mb-4 text-xl font-bold">최근 주문</h2>
+    <div className="mt-4 ">
+      <h2 className="px-4 mt-4 mb-4 text-xl font-bold text-slate-800 dark:text-slate-50">
+        최근 주문
+      </h2>
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
@@ -123,8 +125,8 @@ export default function CustomDataTable() {
                 onClick={() => handlePageChange(number)}
                 className={`px-4 py-2 border rounded ${
                   currentPage === number
-                    ? "bg-blue-500 text-white"
-                    : "text-blue-500 bg-white"
+                    ? " text-gray-700  dark:text-slate-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    : "text-blue-300 text-slate-200"
                 }`}
               >
                 {number}

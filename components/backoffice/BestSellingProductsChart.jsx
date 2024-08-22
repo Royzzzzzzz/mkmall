@@ -30,8 +30,10 @@ export default function BestSellingProductsChart() {
   };
 
   return (
-    <div className="p-8 rounded-lg bg-slate-700">
-      <h2 className="text-xl font-bold">판매 순위</h2>
+    <div className="p-8 bg-white rounded-lg dark:bg-slate-700">
+      <h2 className="text-xl font-bold text-slate-800 dark:text-slate-50">
+        판매 순위
+      </h2>
       <div className="p-4">
         <Pie data={data} width={100} height={100} className="h-14 w-14" />
       </div>
