@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 export default function Sidebar() {
   return (
-    <div className="h-screen p-3 space-y-6 bg-slate-50 dark:bg-slate-700 w-52 dark:text-slate-50 text-slate-800">
+    <div className="w-64 h-screen p-3 space-y-6 bg-slate-50 dark:bg-slate-700 dark:text-slate-50 text-slate-800">
       <Link className="mb-6" href="#">
         Logo
       </Link>
