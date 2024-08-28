@@ -34,7 +34,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 
-export default function Sidebar() {
+export default function Sidebar({ showSidebar }) {
   const pathname = usePathname();
   const sidebarLinks = [
     {
@@ -102,7 +102,13 @@ export default function Sidebar() {
   ];
   const [openMenu, setOpenMenu] = useState(false);
   return (
-    <div className="hidden w-64 h-screen py-4 space-y-6 bg-slate-50 dark:bg-slate-700 dark:text-slate-50 text-slate-800 sm:block">
+    <div
+      className={
+        showSidebar
+          ? "sm:mt-0 w-64 h-screen py-4 fixed left-0 top-0 space-y-6 bg-slate-50 dark:bg-slate-700 dark:text-slate-50 text-slate-800 sm:block mt-20 overflow-y-scroll"
+          : "mt-20 sm:mt-0 left-0 top-0 hidden w-64 h-screen py-4 space-y-6 bg-slate-50 dark:bg-slate-700 dark:text-slate-50 text-slate-800 sm:block overflow-y-scroll"
+      }
+    >
       <Link className="px-6" href="#">
         <span className="">mkMall</span>
       </Link>

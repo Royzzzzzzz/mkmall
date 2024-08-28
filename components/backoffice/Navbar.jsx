@@ -34,7 +34,7 @@ const profilePicUrl = "https://via.placeholder.com/40"; // 프로필 사진 URL
 
 const getRandomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-export default function Navbar() {
+export default function Navbar({ setShowSidebar, showSidebar }) {
   const [notifications, setNotifications] = useState([]);
   const [showNotifications, setShowNotifications] = useState(false);
   const notificationRef = useRef(null); // 알림창을 참조하기 위한 ref
@@ -100,7 +100,10 @@ export default function Navbar() {
 
   return (
     <div className="fixed top-0 z-50 flex items-center justify-between w-full h-20 px-8 py-4 bg-slate-700 text-slate-50 pr-[14rem] bg-white dark:bg-slate-800">
-      <button className="text-lime-700 dark:text-lime-500">
+      <button
+        onClick={() => setShowSidebar(!showSidebar)}
+        className="text-lime-700 dark:text-lime-500"
+      >
         <AlignJustify size={24} />
       </button>
       {/* 3 아이콘 */}
