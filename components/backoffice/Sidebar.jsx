@@ -18,6 +18,8 @@ import {
   ScanSearch,
   Monitor,
   ChevronDown,
+  Building2,
+  CircleDollarSign,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import {
@@ -63,14 +65,24 @@ export default function Sidebar({ showSidebar }) {
       href: "/dashboard/staff",
     },
     {
-      title: "설정",
-      icon: LayoutGrid,
-      href: "/dashboard/settings",
-    },
-    {
       title: "온라인 스토어",
       icon: ExternalLink,
       href: "/",
+    },
+    {
+      title: "MK 커뮤니티",
+      icon: Building2,
+      href: "/dashboard/community",
+    },
+    {
+      title: "결제",
+      icon: CircleDollarSign,
+      href: "/dashboard/wallet",
+    },
+    {
+      title: "설정",
+      icon: LayoutGrid,
+      href: "/dashboard/settings",
     },
   ];
   const catalogueLinks = [
@@ -105,8 +117,8 @@ export default function Sidebar({ showSidebar }) {
     <div
       className={
         showSidebar
-          ? "sm:mt-0 w-64 h-screen py-4 fixed left-0 top-0 space-y-6 bg-slate-50 dark:bg-slate-700 dark:text-slate-50 text-slate-800 sm:block mt-20 overflow-y-scroll"
-          : "mt-20 sm:mt-0 left-0 top-0 hidden w-64 h-screen py-4 space-y-6 bg-slate-50 dark:bg-slate-700 dark:text-slate-50 text-slate-800 sm:block overflow-y-scroll"
+          ? "sm:mt-0 w-64 h-screen py-4 fixed left-0 top-0 space-y-6 bg-slate-50 dark:bg-slate-800 dark:text-slate-300 text-slate-800 sm:block mt-20 overflow-y-scroll"
+          : "mt-20 sm:mt-0 left-0 top-0 hidden w-64 h-screen py-4 space-y-6 bg-slate-50 dark:bg-slate-800 dark:text-slate-300 text-slate-800 sm:block overflow-y-scroll"
       }
     >
       <Link className="px-6" href="#">
