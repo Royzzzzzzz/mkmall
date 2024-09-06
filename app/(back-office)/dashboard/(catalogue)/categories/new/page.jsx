@@ -1,17 +1,31 @@
 "use client";
 import FormHeader from "@/components/backoffice/FormHeader";
+import ImageInput from "@/components/FormInputs/ImageInput";
 import SubmitButton from "@/components/FormInputs/SubmitButton";
+import TextareaInput from "@/components/FormInputs/TextAreaInput";
 import TextInput from "@/components/FormInputs/TextInput";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function NewCategory() {
+  const [imageUrl, setImageUrl] = useState("");
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   async function onSubmit(data) {
+    {
+      /* 
+      -id => auto()
+      -title 
+      -slug => auto()
+      -description 
+      -image
+       */
+    }
+    const slug = generateSlug(data.title);
+    data.slug = slug;
     console.log(data);
   }
   return (
@@ -28,11 +42,24 @@ export default function NewCategory() {
             register={register}
             errors={errors}
           />
+          <TextareaInput
+            label="Category Description"
+            name="description"
+            register={register}
+            errors={errors}
+          />
+          <ImageInput
+            Label="카테고리 이미지"
+            imageUrl={imageUrl}
+            setImageUrl={setImageUrl}
+            endpoint="categoryImageUploader"
+          />
         </div>
+
         <SubmitButton
           isLoading={false}
-          buttonTitle="Create Category"
-          loadingButtonTitle="Create Category please wait..."
+          buttonTitle="카테고리 생성"
+          loadingButtonTitle="카테고리 생성중입니다..."
         />
       </form>
 
