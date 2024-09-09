@@ -2,8 +2,8 @@ import React from "react";
 import { Plus, Trash2, Search, Download } from "lucide-react";
 export default function TableActions() {
     return (
-        <div className="flex items-center justify-between gap-8 px-12 py-6 mt-12 rounded-lg bg-slate-700">
-            <button className="relative inline-flex items-center justify-center px-4 py-3 space-x-3 text-base font-medium text-gray-900 border border-yellow-200 rounded-lg hover:bg-blue-800 group bg-slate-800 from-purple-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+        <div className="flex items-center justify-between gap-8 px-12 py-6 mt-12 rounded-lg  bg-white">
+            <button className="relative inline-flex items-center justify-center px-4 py-3 space-x-3 text-base font-medium text-gray-900 border dark:border-yellow-200 border-yellow-200 rounded-lg hover:bg-yellow-200 group dark:bg-slate-800 bg-slate-100 from-purple-600  dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
                 <Download />
                 <span>추출하기</span>
             </button>
