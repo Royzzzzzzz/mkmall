@@ -1,17 +1,19 @@
-import { NextFetchEvent, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 export async function POST(request) {
-    try {
-        const { title, slug, imageUrl, description } = await request.json();
-        const newCategory = { title, slug, imageUrl, description }
-        console.log(newCategory)
-        return NextResponse.json(newCategory)
-    } catch (error) {
-        console.log(error)
-        return NextResponse.json({
-            message: "Failed to create Category",
-            error
-        }, { status: 500 })
-    }
-
+  try {
+    const { title, slug, imageUrl, description } = await request.json();
+    const newCategory = { title, slug, imageUrl, description };
+    console.log(newCategory);
+    return NextResponse.json(newCategory);
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      {
+        message: "카테고리 생성 실패",
+        error,
+      },
+      { status: 500 }
+    );
+  }
 }

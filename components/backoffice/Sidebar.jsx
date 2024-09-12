@@ -20,6 +20,7 @@ import {
   ChevronDown,
   Building2,
   CircleDollarSign,
+  MonitorPlay,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import {
@@ -97,19 +98,14 @@ export default function Sidebar({ showSidebar }) {
       href: "/dashboard/categories",
     },
     {
-      title: "속성",
-      icon: SendToBack,
-      href: "/dashboard/attributes",
-    },
-    {
       title: "쿠폰",
       icon: ScanSearch,
       href: "/dashboard/coupons",
     },
     {
-      title: "스토어 슬라이더",
-      icon: Monitor,
-      href: "/dashboard/sliders",
+      title: "스토어 배너",
+      icon: MonitorPlay,
+      href: "/dashboard/banners",
     },
   ];
   const [openMenu, setOpenMenu] = useState(false);
@@ -149,7 +145,7 @@ export default function Sidebar({ showSidebar }) {
               {openMenu ? <ChevronDown /> : <ChevronRight />}
             </button>
           </CollapsibleTrigger>
-          <CollapsibleContent className="px-3 py-3 pl-6 rounded-lg bg-slate-800">
+          <CollapsibleContent className="px-3 py-3 pl-6 rounded-lg dark:bg-slate-800 dark:text-slate-300">
             {catalogueLinks.map((item, i) => {
               const Icon = item.icon;
               return (
