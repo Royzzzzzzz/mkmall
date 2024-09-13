@@ -117,8 +117,10 @@ export default function Sidebar({ showSidebar }) {
           : "mt-20 sm:mt-0 left-0 top-0 hidden w-64 h-screen py-4 space-y-6 bg-slate-50 dark:bg-slate-800 dark:text-slate-300 text-slate-800 sm:block overflow-y-scroll"
       }
     >
-      <Link className="px-6" href="#">
-        <span className="">mkMall</span>
+      <Link className="px-6" href="/dashboard">
+        <span className="">
+          mkMall
+        </span>
       </Link>
       <div className="flex flex-col space-y-3">
         <Link
