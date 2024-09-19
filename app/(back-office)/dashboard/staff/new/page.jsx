@@ -9,8 +9,9 @@ import { generateCouponCode } from "@/lib/generateCouponCode";
 import { makePostRequest } from "@/lib/apiRequest";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import ToggleInput from "@/components/FormInputs/ToggleInput";
 
-export default function NewFarmer() {
+export default function NewStaff() {
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -18,7 +19,12 @@ export default function NewFarmer() {
     watch,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      isActive: true,
+    },
+  });
+  const isActive = watch("isActive");
   async function onSubmit(data) {
     {
       /* 
@@ -31,56 +37,64 @@ export default function NewFarmer() {
     const farmerUniqueCode = generateCouponCode(data.title, data.expiryDate);
     data.couponCode = couponCode;
     console.log(data);
-    makePostRequest(setLoading, "api/coupons", data, "Coupon", reset);
+    makePostRequest(setLoading, "api/staff", data, "Staff", reset);
   }
   return (
     <div>
-      <FormHeader title="새로운 쿠폰 발행" />
+      <FormHeader title="새로운 직원 추가" />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full max-w-4xl p-4 mx-auto my-3 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
       >
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
           <TextInput
-            label="Farmer's Name"
+            label="직원 이름"
             name="name"
             register={register}
             errors={errors}
-            className="w-full"
           />
           <TextInput
-            label="Farmer's Phone"
-            name="phone"
+            label="비밀번호"
+            name="password"
+            type="password"
             register={register}
             errors={errors}
             className="w-full"
           />
+
           <TextInput
-            label="Farmer's Email Address"
+            label="직원 이메일"
             name="email"
             register={register}
             errors={errors}
             className="w-full"
           />
           <TextInput
-            label="Farmer's Physical Address"
-            name="physicalAddress"
+            label="직원 연락처"
+            name="phone"
             register={register}
             errors={errors}
             className="w-full"
           />
           <TextInput
-            label="Farmer's Contact Person"
-            name="contactPerson"
+            label="직원 주소"
+            name="physicalAddress"
             register={register}
             errors={errors}
             className="w-full"
           />
+          <TextareaInput
+            label="Notes"
+            name="비고"
+            register={register}
+            errors={errors}
+            isRequired={false}
+          />
         </div>
         <SubmitButton
           isLoading={loading}
-          buttonTitle="쿠폰 생성"
-          loadingButtonTitle="쿠폰 생성중입니다..."
+          buttonTitle="직원 추가"
+          loadingButtonTitle="직원 추가중입니다..."
         />
       </form>
 
