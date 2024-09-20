@@ -10,6 +10,7 @@ import { makePostRequest } from "@/lib/apiRequest";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import ToggleInput from "@/components/FormInputs/ToggleInput";
+import { generateUserCode } from "@/lib/generateUserCode";
 
 export default function NewStaff() {
   const [loading, setLoading] = useState(false);
@@ -25,6 +26,18 @@ export default function NewStaff() {
     },
   });
   const isActive = watch("isActive");
+  /*
+  -name 
+  -password
+  -email
+  -phone
+  -physicalAddress
+  -NIN
+  -DOB
+  -notes
+  -isActive
+  -몽고db비번: QWl6qxsZJ7tN0Jik
+  */
   async function onSubmit(data) {
     {
       /* 
@@ -34,10 +47,10 @@ export default function NewStaff() {
       -expiryData
        */
     }
-    const farmerUniqueCode = generateCouponCode(data.title, data.expiryDate);
-    data.couponCode = couponCode;
+    const code = generateUserCode("LSM", data.name);
+    data.code = code;
     console.log(data);
-    makePostRequest(setLoading, "api/staff", data, "Staff", reset);
+    makePostRequest(setLoading, "api/staffs", data, "Staff", reset);
   }
   return (
     <div>
@@ -52,6 +65,21 @@ export default function NewStaff() {
             name="name"
             register={register}
             errors={errors}
+          />
+          <TextInput
+            label="NIN (Id Number)"
+            name="nin"
+            register={register}
+            errors={errors}
+            className="w-full"
+          />
+          <TextInput
+            label="생년월일"
+            name="dob"
+            type="date"
+            register={register}
+            errors={errors}
+            className="w-full"
           />
           <TextInput
             label="비밀번호"

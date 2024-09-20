@@ -1,6 +1,7 @@
 "use client";
 import FormHeader from "@/components/backoffice/FormHeader";
 import ImageInput from "@/components/FormInputs/ImageInput";
+import QuillEditor from "@/components/FormInputs/QuillEditor";
 import SelectInput from "@/components/FormInputs/SelectInput";
 import SubmitButton from "@/components/FormInputs/SubmitButton";
 import TextareaInput from "@/components/FormInputs/TextAreaInput";
@@ -10,8 +11,6 @@ import { makePostRequest } from "@/lib/apiRequest";
 import { generateSlug } from "@/lib/generateSlug";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 
 export default function NewCategory() {
   const [imageUrl, setImageUrl] = useState("");
@@ -47,31 +46,8 @@ export default function NewCategory() {
   });
 
   // Quill Editor
-  const modules = {
-    toolbar: [
-      [{ header: [1, 2, false] }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [{ list: "ordered" }, { list: "bullet" }],
-      ["link", "color", "image"],
-      [{ "code-block": true }],
-      ["clean"],
-    ],
-  };
-  const formats = [
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "link",
-    "indent",
-    "image",
-    "code-block",
-    "color",
-  ];
+  const [content, setContent] = useState("");
+
   // Quill EDITOR END
 
   const isActive = watch("isActive");
@@ -92,9 +68,11 @@ export default function NewCategory() {
     const slug = generateSlug(data.title);
     data.slug = slug;
     data.imageUrl = imageUrl;
+    data.content = content;
     console.log(data);
-    // makePostRequest(setLoading, "api/categories", data, "Category", reset);
-    // setImageUrl("");
+    makePostRequest(setLoading, "api/trainings", data, "Training", reset);
+    setImageUrl("");
+    setContent("");
   }
   return (
     <div>
@@ -132,6 +110,11 @@ export default function NewCategory() {
             endpoint="trainingImageUploader"
           />
           {/* 콘텐츠 시작 */}
+          <QuillEditor
+            label="트레이닝 콘텐츠"
+            value={content}
+            onChange={setContent}
+          />
           {/* 콘텐츠 종료 */}
           <ToggleInput
             label="트레이닝 공개여부"
@@ -143,8 +126,8 @@ export default function NewCategory() {
         </div>
         <SubmitButton
           isLoading={loading}
-          buttonTitle="카테고리 생성"
-          loadingButtonTitle="카테고리 생성중입니다..."
+          buttonTitle="트레이닝 생성"
+          loadingButtonTitle="트레이닝 생성중입니다..."
         />
       </form>
 
