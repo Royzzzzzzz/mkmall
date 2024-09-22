@@ -9,6 +9,7 @@ import { makePostRequest } from "@/lib/apiRequest";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import ToggleInput from "@/components/FormInputs/ToggleInput";
+import { useRouter } from "next/navigation";
 
 export default function NewCoupon() {
     const [imageUrl, setImageUrl] = useState("");
@@ -25,6 +26,10 @@ export default function NewCoupon() {
         },
     });
     const isActive = watch("isActive");
+    const router = useRouter();
+    function redirect() {
+        router.push("/dashboard/banners");
+    }
     async function onSubmit(data) {
         {
             /* 
@@ -32,12 +37,13 @@ export default function NewCoupon() {
       -title 
       -link
       -image
+      isActive
        */
         }
         console.log(process.env.NEXT_PUBLIC_BASE_URL);
         data.imageUrl = imageUrl;
         console.log(data);
-        makePostRequest(setLoading, "api/banners", data, "Banner", reset);
+        makePostRequest(setLoading, "api/banners", data, "Banner", reset, redirect);
         setImageUrl("");
     }
     return (

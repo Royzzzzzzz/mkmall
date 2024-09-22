@@ -15,6 +15,108 @@ model Coupon{
   title String
   couponCode String
   expiryDate DateTime
+  isActive Boolean
 	createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Banner{
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  link String
+  imageUrl String
+  isActive Boolean
+	createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+//관계
+
+// 1대 1 관계 Realationship User => Profile Relation
+// 1대 다 관계 => Category => Product Relation
+// 다대 다 관계
+
+model Category {
+   id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  title      String 
+  slug       String @unique
+  imageUrl  String?
+  description String?   
+  isActive Boolean
+  products  Product[]  
+  trainings  Training[]  
+
+  marketIds String[] @db.ObjectId
+  markets   Market[]   @relation(fields: [marketIds], references: [id])
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+}
+
+model Market {
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  name        String     @unique
+  title String
+  slug       String @unique
+  logoUrl  String?
+  description String?   
+  isActive Boolean
+  
+  categoryIds String[]   @db.ObjectId
+  categories  Category[] @relation(fields: [categoryIds], references: [id])
+
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime?  @updatedAt
+}
+
+model Product {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  title       String    @unique
+  slug       String    @unique
+  imageUrl String?
+  description String?
+  isActive Boolean
+  sku      String?
+  barcode  String?
+  productPrice Float
+  salePrice Float
+  tags      String[]
+  
+  category   Category  @relation(fields: [categoryId], references: [id])
+  categoryId String @db.ObjectId
+  farmer   Farmer  @relation(fields: [farmerId], references: [id])
+  farmerId String @db.ObjectId
+
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime? @updatedAt
+}
+
+model Farmer{ 
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  code String
+  contactPerson String?
+  contactPersonPhone String?
+  email String
+  name String
+  notes String?
+  phone String
+  physicalAddress String?
+  terms String?
+  isActive Boolean
+  products Product[]
+	createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Training {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  title       String    @unique
+  slug       String    @unique
+  imageUrl String?
+  description String?
+  content String?
+  isActive Boolean
+
+  category   Category  @relation(fields: [categoryId], references: [id])
+  categoryId String @db.ObjectId
 }

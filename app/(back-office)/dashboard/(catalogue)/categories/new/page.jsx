@@ -13,24 +13,7 @@ import { useForm } from "react-hook-form";
 
 export default function NewCategory() {
     const [imageUrl, setImageUrl] = useState("");
-    const markets = [
-        {
-            id: 1,
-            title: "민기 송파마켓점",
-        },
-        {
-            id: 2,
-            title: "민기 강남마켓점",
-        },
-        {
-            id: 3,
-            title: "민기 강동마켓점",
-        },
-        {
-            id: 4,
-            title: "민기 용산마켓점",
-        },
-    ];
+    const markets = [];
     const [loading, setLoading] = useState(false);
     const {
         register,
@@ -67,8 +50,8 @@ export default function NewCategory() {
             <FormHeader title="새로운 카테고리 추가" />
             <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-4xl p-4 mx-auto my-3 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
                 <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-                    <TextInput label="카테고리 이름" name="title" register={register} errors={errors} className="w-full" />
-                    <SelectInput label="시장 선택" name="marketIds" register={register} errors={errors} className="w-full" options={markets} multiple={true} />
+                    <TextInput label="카테고리 이름" name="title" register={register} errors={errors} />
+                    {/* <SelectInput label="시장 선택" name="marketIds" register={register} errors={errors} className="w-full" options={markets} multiple={true} /> */}
                     <TextareaInput label="카테고리 설명" name="description" register={register} errors={errors} />
                     <ImageInput label="카테고리 이미지" imageUrl={imageUrl} setImageUrl={setImageUrl} endpoint="categoryImageUploader" />
                     <ToggleInput label="카테고리 공개여부" name="isActive" trueTitle="Active" falseTitle="Draft" register={register} />
