@@ -11,7 +11,7 @@ export async function POST(request) {
         title,
         couponCode,
         expiryDate,
-        isActive
+        isActive,
       },
     });
     console.log(newCoupon);
@@ -21,6 +21,22 @@ export async function POST(request) {
     return NextResponse.json(
       {
         message: "쿠폰 생성 실패",
+        error,
+      },
+      { status: 500 }
+    );
+  }
+}
+
+export async function GET(request) {
+  try {
+    const coupons = await db.coupon.findMany();
+    return NextResponse.json(coupons);
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      {
+        message: "쿠폰 가져오기 실패",
         error,
       },
       { status: 500 }

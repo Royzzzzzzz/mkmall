@@ -117,15 +117,16 @@ enum Gender{
 }
 
 model User{
-   id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
   name String?
   email String? @unique
   emailVerfied DateTime?
-  image String?
+
   products Product[]
+
   role UserRole @default(USER)
 
-  farmerProfile FarmerProfile
+  farmerProfile FarmerProfile?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   
@@ -137,6 +138,7 @@ model FarmerProfile{
   code String
   contactPerson String?
   contactPersonPhone String?
+  profileImageUrl String?
   email String
   name String
   notes String?
@@ -151,3 +153,6 @@ model FarmerProfile{
 	createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+ 
+// ADMIN TEACHER PARENT STUDENT
+

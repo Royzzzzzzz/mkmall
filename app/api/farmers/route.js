@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
-import db from '@/lib/db';
+import db from "@/lib/db";
 
 export async function POST(request) {
   try {
-    const { code,
+    const {
+      code,
       contactPerson,
       contactPersonPhone,
       email,
@@ -12,7 +13,8 @@ export async function POST(request) {
       phone,
       physicalAddress,
       terms,
-      isActive
+      isActive,
+      profileImageUrl,
     } = await request.json();
     const newFarmer = await db.farmer.create({
       data: {
@@ -25,9 +27,10 @@ export async function POST(request) {
         phone,
         physicalAddress,
         terms,
-        isActive
+        isActive,
+        profileImageUrl,
       },
-    })
+    });
     console.log(newFarmer);
     return NextResponse.json(newFarmer);
   } catch (error) {
