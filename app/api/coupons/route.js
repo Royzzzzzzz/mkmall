@@ -30,7 +30,11 @@ export async function POST(request) {
 
 export async function GET(request) {
   try {
-    const coupons = await db.coupon.findMany();
+    const coupons = await db.coupon.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
     return NextResponse.json(coupons);
   } catch (error) {
     console.log(error);
