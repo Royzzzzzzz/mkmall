@@ -1,5 +1,6 @@
 import db from "@/lib/db";
 import { NextResponse } from "next/server";
+import bcrypt from 'bcrypt'
 
 export default async function POST(request) {
   try {
@@ -21,6 +22,15 @@ export default async function POST(request) {
         { status: 409 }
       );
     }
+    // 비밀번호 암호화 => bcrypt
+    const hashedPassword = await bcrypt.hash(password, 10)
+    const newUser = await db.user.create({
+      data: {
+        name, email, password: hashedPassword,
+      }
+    })
+    console.log(newUser);
+    return NextResponse.json(newUser)
   } catch (error) {
     console.log(error);
     return NextResponse.json(
