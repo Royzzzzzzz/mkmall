@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import SubmitButton from "../FormInputs/SubmitButton";
 import TextInput from "../FormInputs/TextInput";
 
-export default function RegisterForm() {
+export default function RegisterForm({ role }) {
   const router = useRouter(); //리디렉션
   const {
     register,
@@ -56,6 +56,15 @@ export default function RegisterForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mb-4">
+      <TextInput
+        label="Role"
+        name="role"
+        register={register}
+        errors={errors}
+        type="text"
+        defaultValue={role}
+        className="mb-3 sm:col-span-2"
+      />
       <TextInput
         label="성함"
         name="name"
