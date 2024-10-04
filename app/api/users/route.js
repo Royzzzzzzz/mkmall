@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 export async function POST(request) {
   try {
     //extract the creddentials
-    const { name, email, password } = await request.json();
+    const { name, email, password, role } = await request.json();
 
     //Check if the user Already exists in the db
     const existingUser = await db.user.findUnique({
@@ -29,6 +29,7 @@ export async function POST(request) {
         name,
         email,
         password: hashedPassword,
+        role,
       },
     });
     console.log(newUser);

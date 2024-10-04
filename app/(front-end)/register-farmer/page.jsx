@@ -21,7 +21,7 @@ export default function page() {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-center text-gray-900 md:text-2xl dark:text-white">
               새로 계정 만들기
             </h1>
-            <RegisterForm />
+            <RegisterForm role="FARMER" />
           </div>
         </div>
       </div>

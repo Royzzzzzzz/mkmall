@@ -55,13 +55,13 @@ export default function RegisterForm({ role }) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mb-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="">
       <TextInput
-        label="Role"
+        label=""
         name="role"
         register={register}
         errors={errors}
-        type="text"
+        type="hidden"
         defaultValue={role}
         className="mb-3 sm:col-span-2"
       />
