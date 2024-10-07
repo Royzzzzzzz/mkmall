@@ -15,6 +15,9 @@ export async function POST(request) {
       terms,
       isActive,
       profileImageUrl,
+      products,
+      landSize,
+      mainCrop,
     } = await request.json();
     const newFarmer = await db.farmer.create({
       data: {
