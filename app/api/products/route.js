@@ -1,6 +1,23 @@
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
+  barcode;
+  categoryId;
+  description;
+  farmerId;
+  imageUrl;
+  isActive;
+  isWholesale;
+  productCode;
+  productPrice;
+  salePrice;
+  sku;
+  slug;
+  tags;
+  title;
+  unit;
+  wholesalePrice;
+  wholesaleQty;
   try {
     const productData = await request.json();
     console.log(productData);

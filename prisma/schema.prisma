@@ -69,17 +69,22 @@ model Market {
   updatedAt   DateTime?  @updatedAt
 }
 
-model Product {
+model Product { 
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
   title       String    @unique
   slug       String    @unique
   imageUrl String?
   description String?
   isActive Boolean
+  isWholesale Boolean
   sku      String?
   barcode  String?
+  productCode  String?
+  unit  String?
   productPrice Float
   salePrice Float
+  wholesalePrice Float
+  wholesaleQty Int
   tags      String[]
   
   category   Category  @relation(fields: [categoryId], references: [id])
