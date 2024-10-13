@@ -3,8 +3,8 @@ import db from "@/lib/db";
 
 export async function POST(request) {
   try {
-    const {
-      code,
+    /* 
+    code,
       contactPerson,
       contactPersonPhone,
       email,
@@ -18,29 +18,55 @@ export async function POST(request) {
       products,
       landSize,
       mainCrop,
-    } = await request.json();
-    const newFarmer = await db.farmer.create({
+      userId
+    */
+    const farmerData = await request.json();
+    const newFarmerProfile = await db.farmerProfile.create({
       data: {
-        code,
-        contactPerson,
-        contactPersonPhone,
-        email,
-        name,
-        notes,
-        phone,
-        physicalAddress,
-        terms,
-        isActive,
-        profileImageUrl,
-      },
-    });
-    console.log(newFarmer);
-    return NextResponse.json(newFarmer);
+        code: farmerData.code,
+        contactPerson: farmerData.contactPerson,
+        contactPersonPhone: farmerData.contactPersonPhone,
+        profileImageUrl: farmerData.profileImageUrl,
+        email: farmerData.email,
+        name: farmerData.name,
+        notes: farmerData.notes,
+        phone: farmerData.phone,
+        physicalAddress: farmerData.physicalAddress,
+        terms: farmerData.terms,
+        isActive: farmerData.isActive,
+        products: farmerData.products,
+        landSize: parseFloat(farmerData.landSize),
+        mainCrop: farmerData.mainCrop,
+        userId: farmerData.userId,
+      }
+    })
+    console.log(newFarmerProfile);
+    return NextResponse.json(newFarmerProfile);
   } catch (error) {
     console.log(error);
     return NextResponse.json(
       {
         message: "공급업체 생성 실패",
+        error,
+      },
+      { status: 500 }
+    );
+  }
+}
+
+export async function GET(request) {
+  try {
+    const profiles = await db.farmerProfile.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+    return NextResponse.json(profiles);
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      {
+        message: "프로필 가져오기 실패",
         error,
       },
       { status: 500 }

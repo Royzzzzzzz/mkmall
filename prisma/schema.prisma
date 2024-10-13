@@ -85,6 +85,8 @@ model Product {
   salePrice Float
   wholesalePrice Float
   wholesaleQty Int
+  productStock Int
+  qty Int
   tags      String[]
   
   category   Category  @relation(fields: [categoryId], references: [id])
