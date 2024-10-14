@@ -55,7 +55,7 @@ model Category {
 
 model Market {
   id          String     @id @default(auto()) @map("_id") @db.ObjectId
-  name        String     @unique
+  name        String?     @unique
   title String
   slug       String @unique
   logoUrl  String?
