@@ -5,7 +5,7 @@ export default function SearchForm() {
   return (
     <form className="flex items-center">
       <label for="voice-search" className="sr-only">
-        Search
+        검색
       </label>
       <div className="relative w-full">
         <div className="absolute inset-y-0 flex items-center pointer-events-none start-0 ps-3">
@@ -15,7 +15,7 @@ export default function SearchForm() {
           type="text"
           id="voice-search"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Search Mockups, Logos, Design Templates..."
+          placeholder="상품, 카테고리, 시장을 입력하세요"
           required
         />
         <button

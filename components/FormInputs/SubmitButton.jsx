@@ -12,7 +12,7 @@ export default function SubmitButton({
         <button
           disabled
           type="button"
-          className="mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center"
+          className="inline-flex items-center px-5 py-2 mt-4 mr-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           <svg
             aria-hidden="true"
@@ -36,7 +36,7 @@ export default function SubmitButton({
       ) : (
         <button
           type="submit"
-          className="inline-flex items-center px-5 py-3 mt-4 text-sm font-medium text-center text-white rounded-lg bg-slate-900 sm:mt-6 focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-slate-800 dark:bg-yellow-500 dark:hover:bg-yellow-400"
+          className="inline-flex items-center px-5 py-2 my-4 mt-4 text-sm font-medium text-center text-white rounded-lg bg-slate-900 sm:mt-6 focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-slate-800 dark:bg-yellow-500 dark:hover:bg-yellow-400"
         >
           <Plus className="w-5 h-5 mr-2" />
           <span>{buttonTitle}</span>

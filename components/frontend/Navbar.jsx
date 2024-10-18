@@ -7,7 +7,7 @@ import { HelpCircle, ShoppingCart, User } from "lucide-react";
 import ThemeSwitcherBtn from "../ThemeSwitcherBtn";
 export default function Navbar() {
   return (
-    <div className="bg-gray-50 dark:bg-slate-800">
+    <div className="bg-white dark:bg-slate-800">
       <div className="flex items-center justify-between gap-8 px-8 py-3 mx-auto max-w-7xl">
         {/* Logo */}
         <Link className="" href="/">
@@ -27,7 +27,7 @@ export default function Navbar() {
           </Link>
           <button className="flex items-center space-x-1 text-green-950 dark:text-slate-100">
             <HelpCircle />
-            <span>Help</span>
+            <span>도움말</span>
           </button>
           <Link
             href="/cart"
