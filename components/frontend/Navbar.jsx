@@ -5,6 +5,7 @@ import Image from "next/image";
 import logo from "../../public/mkmall_logo.png";
 import { HelpCircle, ShoppingCart, User } from "lucide-react";
 import ThemeSwitcherBtn from "../ThemeSwitcherBtn";
+import HelpModal from "./HelpModal";
 export default function Navbar() {
     return (
         <div className="bg-white dark:bg-slate-800">
@@ -24,10 +25,11 @@ export default function Navbar() {
                         <User />
                         <span>로그인</span>
                     </Link>
-                    <button className="flex items-center space-x-1 text-green-950 dark:text-slate-100">
+                    {/* <button className="flex items-center space-x-1 text-green-950 dark:text-slate-100">
                         <HelpCircle />
                         <span>도움말</span>
-                    </button>
+                    </button> */}
+                    <HelpModal />
                     <Link
                         href="/cart"
                         type="button"
