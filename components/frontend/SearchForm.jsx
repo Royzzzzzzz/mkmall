@@ -4,7 +4,7 @@ import React from "react";
 export default function SearchForm() {
   return (
     <form className="flex items-center">
-      <label for="voice-search" className="sr-only">
+      <label htmlFor="voice-search" className="sr-only">
         검색
       </label>
       <div className="relative w-full">
