@@ -1,6 +1,8 @@
+"use client"
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import HeroCarousel from "./HeroCarousel";
 
 export default function Hero() {
   const categories = [{}, {}, {}, {}, {}];
@@ -31,7 +33,9 @@ export default function Hero() {
           })}
         </div>
       </div>
-      <div className="w-2/3 bg-blue-500 rounded-md">carousel</div>
+      <div className="w-2/3 bg-blue-500 rounded-md">
+        <HeroCarousel />
+      </div>
     </div>
   );
 }
