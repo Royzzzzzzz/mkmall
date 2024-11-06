@@ -1,14 +1,15 @@
-"use client"
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import HeroCarousel from "./HeroCarousel";
+import { HelpCircle } from "lucide-react";
 
 export default function Hero() {
-  const categories = [{}, {}, {}, {}, {}];
+  const categories = [{}, {}, {}, {}, {}, {}, {}];
   return (
-    <div className="flex gap-8">
-      <div className="w-1/3 max-w-sm overflow-hidden bg-white border border-gray-300 rounded-lg shadow dark:bg-gray-700 dark:border-gray-700 text-slate-800 ">
+    <div className="grid grid-cols-12 gap-8 mb-6">
+      <div className="col-span-3 overflow-hidden bg-white border border-gray-300 rounded-lg shadow dark:bg-gray-700 dark:border-gray-700 text-slate-800 ">
         <h2 className="px-6 py-3 font-semibold border-b border-gray-300 bg-slate-100 dark:border-gray-600 hover:bg-slate-50 dark:bg-slate-700 text-slate-800 dark:text-slate-100">
           카테고리
         </h2>
@@ -33,8 +34,17 @@ export default function Hero() {
           })}
         </div>
       </div>
-      <div className="w-2/3 bg-blue-500 rounded-md">
+      <div className="col-span-7 bg-blue-600 rounded-md">
         <HeroCarousel />
+      </div>
+      <div className="col-span-2 p-4 bg-white rounded-md dark:bg-slate-800">
+        <Link href="#" className="flex items-center space-x-3">
+          <HelpCircle className="shrink-0" />
+          <div className="flex flex-col">
+            <h2 className="uppercase">도움센터</h2>
+            <p className="text-[0.7rem]">도움이 필요하신가요?</p>
+          </div>
+        </Link>
       </div>
     </div>
   );
