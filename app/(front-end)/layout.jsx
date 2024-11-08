@@ -5,7 +5,7 @@ export default function Layout({ children }) {
   return (
     <div>
       <Navbar />
-      <div className="max-w-6xl py-6 mx-auto">{children}</div>
+      <div className="max-w-6xl py-6 mx-auto lg-px-0">{children}</div>
     </div>
   );
 }
