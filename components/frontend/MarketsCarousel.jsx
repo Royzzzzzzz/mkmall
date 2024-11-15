@@ -9,7 +9,7 @@ export default function MarketsCarousel() {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 5,
+      items: 6,
       slidesToSlide: 3, // optional, default to 1.
     },
     tablet: {
@@ -23,7 +23,7 @@ export default function MarketsCarousel() {
       slidesToSlide: 1, // optional, default to 1.
     },
   };
-  const slides = [{}, {}, {}, {}, {}, {}, {}];
+  const slides = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
   return (
     <Carousel
       swipeable={false}
@@ -41,19 +41,19 @@ export default function MarketsCarousel() {
       removeArrowOnDeviceType={["tablet", "mobile"]}
       //   deviceType={this.props.deviceType}
       dotListClass="custom-dot-list-style"
-      itemClass="carousel-item-padding-40-px"
+      itemClass="px-4"
     >
       {slides.map((slide, i) => {
         return (
-          <Link key={i} href="#" className="mr-3 rounded-lg">
+          <Link key={i} href="#" className="mr-3 bg-red-400 border rounded-lg">
             <Image
-              src="/fruits.png"
+              src="/carousel_slide1.jpg"
               alt="과일"
               width={556}
               height={556}
               className="w-full"
             />
-            <h2 className="bg-slate-600 text-slate-300">과일</h2>
+            <h2 className="text-center text-slate-300">과일</h2>
           </Link>
         );
       })}
