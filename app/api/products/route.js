@@ -27,7 +27,7 @@ export async function POST(request) {
     // Check if this product already exists in the db
     const existingProduct = await db.product.findUnique({
       where: {
-        slug
+        slug,
       },
     });
     if (existingProduct) {
@@ -49,17 +49,17 @@ export async function POST(request) {
         isActive,
         isWholesale,
         productCode,
-        productPrice: parseFloat(productPrice),
-        salePrice: parseFloat(salePrice),
+        productPrice: parseFloat(productPrice) || 0,
+        salePrice: parseFloat(salePrice) || 0,
         sku,
         slug,
         tags,
         title,
         unit,
-        wholesalePrice: parseFloat(wholesalePrice),
-        wholesaleQty: parseInt(wholesaleQty),
-        productStock: parseInt(productStock),
-        qty: parseInt(qty)
+        wholesalePrice: parseFloat(wholesalePrice) || 0,
+        wholesaleQty: parseInt(wholesaleQty) || 0,
+        productStock: parseInt(productStock) || 0,
+        qty: parseInt(qty) || 0
       },
     });
     console.log(newProduct);

@@ -1,3 +1,4 @@
+import Footer from "@/components/frontend/Footer";
 import Navbar from "@/components/frontend/Navbar";
 import React from "react";
 
@@ -6,6 +7,7 @@ export default function Layout({ children }) {
         <div>
             <Navbar />
             <div className="max-w-7xl py-6 mx-auto lg-px-0">{children}</div>
+            <Footer />
         </div>
     );
 }

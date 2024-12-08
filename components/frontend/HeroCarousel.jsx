@@ -1,3 +1,4 @@
+"use client";
 import dynamic from "next/dynamic";
 import { Swiper, SwiperSlide } from "swiper/react"; // Swiper, SwiperSlide 직접 import
 import "swiper/css";
@@ -8,7 +9,7 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules"; // Autoplay �
 import Image from "next/image";
 import Link from "next/link";
 
-export default function HeroCarousel() {
+export default function HeroCarousel({ banners }) {
     return (
         <Swiper
             modules={[Autoplay, Navigation, Pagination]} // Autoplay 모듈 설정
@@ -22,50 +23,19 @@ export default function HeroCarousel() {
             navigation // 좌우 버튼 활성화
             pagination={{ clickable: true }} // dot 활성화
             className="overflow-hidden rounded-md">
-            <SwiperSlide>
-                <Link href="#">
-                    <Image
-                        width={712}
-                        height={384}
-                        src="/banners/1.png"
-                        className="object-cover w-full h-full"
-                        alt="All text"
-                    />
-                </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-                <Link href="#">
-                    <Image
-                        width={712}
-                        height={384}
-                        src="/banners/2.gif"
-                        className="object-cover w-full h-full"
-                        alt="Banner 2"
-                    />
-                </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-                <Link href="#">
-                    <Image
-                        width={712}
-                        height={384}
-                        src="/banners/3.gif"
-                        className="object-cover w-full h-full"
-                        alt="Banner 3"
-                    />
-                </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-                <Link href="#">
-                    <Image
-                        width={712}
-                        height={384}
-                        src="/banners/2.gif"
-                        className="object-cover w-full h-full"
-                        alt="Banner 4"
-                    />
-                </Link>
-            </SwiperSlide>
+            {banners.map((banner, i) => (
+                <SwiperSlide key={i}>
+                    <Link href={banner.link}>
+                        <Image
+                            width={712}
+                            height={384}
+                            src={banner.imageUrl}
+                            className="object-cover w-full h-full"
+                            alt={banner.title}
+                        />
+                    </Link>
+                </SwiperSlide>
+            ))}
         </Swiper>
     );
 }
