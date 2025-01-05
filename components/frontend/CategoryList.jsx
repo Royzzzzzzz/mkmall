@@ -14,7 +14,7 @@ export default function CategoryList({ category }) {
                 </Link>
             </div>
 
-            <div className="bg-white dark:bg-slate-700 py-4">
+            <div className="bg-white dark:bg-slate-700 p-4">
                 <CategoryCarousel products={category.products} />
             </div>
         </div>
