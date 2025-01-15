@@ -72,6 +72,15 @@ export const columns = [
     },
     {
         id: "actions",
-        cell: ({ row }) => <ActionColumn row={row} title="카테고리" />,
+        cell: ({ row }) => {
+            const category = row.original;
+            return (
+                <ActionColumn
+                    row={row}
+                    title="카테고리"
+                    endpoint={`categories/${category.id}`}
+                />
+            );
+        },
     },
 ];

@@ -65,6 +65,15 @@ export const columns = [
     },
     {
         id: "actions",
-        cell: ({ row }) => <ActionColumn row={row} title="배너" />,
+        cell: ({ row }) => {
+            const banner = row.original;
+            return (
+                <ActionColumn
+                    row={row}
+                    title="배너"
+                    endpoint={`banners/${banner.id}`}
+                />
+            );
+        },
     },
 ];

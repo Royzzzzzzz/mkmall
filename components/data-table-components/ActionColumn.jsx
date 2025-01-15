@@ -9,7 +9,8 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-export default function ActionColumn({ row, title }) {
+import DeleteBtn from "../Actions/DeleteBtn";
+export default function ActionColumn({ row, title, endpoint }) {
     const isActive = row.isActive;
     return (
         <DropdownMenu>
@@ -22,7 +23,9 @@ export default function ActionColumn({ row, title }) {
             <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>카테고리 {title}</DropdownMenuItem>
+                <DropdownMenuItem>
+                    <DeleteBtn title={title} endpoint={endpoint} />
+                </DropdownMenuItem>
                 <DropdownMenuItem>카테고리 {title}</DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

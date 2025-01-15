@@ -2,7 +2,7 @@ import db from '../../../../lib/db';
 import { NextResponse } from 'next/server';
 export async function GET(request, { params: { id } }) {
     try {
-        const category = await db.category.findUnique({
+        const banner = await db.banner.findUnique({
             where: {
                 id
             },
@@ -10,12 +10,12 @@ export async function GET(request, { params: { id } }) {
                 products: true
             }
         });
-        return NextResponse.json(category);
+        return NextResponse.json(banner);
     } catch (error) {
         console.log(error);
         return NextResponse.json(
             {
-                message: "카테고리 가져오기 실패",
+                message: "배너 가져오기 실패",
                 error,
             },
             { status: 500 }
@@ -25,28 +25,28 @@ export async function GET(request, { params: { id } }) {
 
 export async function DELETE(request, { params: { id } }) {
     try {
-        const existingCategory = await db.category.findUnique({
+        const existingBanner = await db.banner.findUnique({
             where: {
                 id
             },
         });
-        if (!existingCategory) {
+        if (!existingBanner) {
             return NextResponse.json({
                 data: null,
-                message: "카테고리를 찾을 수 없습니다"
+                message: "배너를 찾을 수 없습니다"
             }, { status: 404 });
         }
-        const deletedCategory = await db.category.delete({
+        const deletedBanner = await db.banner.delete({
             where: {
                 id
             },
         })
-        return NextResponse.json(deletedCategory);
+        return NextResponse.json(deletedBanner);
     } catch (error) {
         console.log(error);
         return NextResponse.json(
             {
-                message: "카테고리 삭제 실패",
+                message: "배너 삭제 실패",
                 error,
             },
             { status: 500 }

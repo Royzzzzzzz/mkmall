@@ -9,6 +9,7 @@ export default function ImageColumn({ row, accessorKey }) {
                 src={imageUrl}
                 width={500}
                 height={500}
+                alt={`${accessorKey}`}
                 className="w-24 h-24 rounded-full"
             />
         </div>
