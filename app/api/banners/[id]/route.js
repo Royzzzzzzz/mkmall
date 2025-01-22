@@ -72,7 +72,7 @@ export async function PUT(request, { params: { id } }) {
     try {
         // 데이터 받기
 
-        const { title, link, imageUrl, isActive } = await request.json();
+        const { title, link, imageUrl, isActive, productIds } = await request.json();
 
         const existingBanner = await db.banner.findUnique({
             where: {
