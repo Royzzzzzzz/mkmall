@@ -1,17 +1,25 @@
-import db from '../../../../lib/db';
 import { NextResponse } from 'next/server';
+import { db } from '@/lib/db';
+import { ObjectId } from "mongodb"; // ObjectId를 MongoDB에서 가져오기
+
 export async function GET(request, { params: { id } }) {
     try {
+        if (!ObjectId.isValid(id)) {
+            return NextResponse.json(
+                { message: "유효하지 않은 ID입니다." },
+                { status: 400 }
+            );
+        }
+
         const banner = await db.banner.findUnique({
-            where: {
-                id
-            },
+            where: { id },
             include: {
-                productRelations: { // 중간 테이블(BannerProduct) 통해 관계 조회
-                    include: { product: true }, // Product 정보 포함
+                productRelations: {
+                    include: { product: true },
                 },
             },
         });
+
         if (!banner) {
             return NextResponse.json(
                 { message: "배너를 찾을 수 없습니다." },
@@ -19,18 +27,18 @@ export async function GET(request, { params: { id } }) {
             );
         }
 
-        // 반환 데이터를 형식화 (products 배열로 반환)
         const formattedBanner = {
             ...banner,
             products: banner.productRelations.map((relation) => relation.product),
         };
+
         return NextResponse.json(formattedBanner);
     } catch (error) {
-        console.log(error);
+        console.error(error);
         return NextResponse.json(
             {
                 message: "배너 가져오기 실패",
-                error,
+                error: error.message,
             },
             { status: 500 }
         );
@@ -39,29 +47,35 @@ export async function GET(request, { params: { id } }) {
 
 export async function DELETE(request, { params: { id } }) {
     try {
-        const existingBanner = await db.banner.findUnique({
-            where: {
-                id
-            },
-        });
-        if (!existingBanner) {
-            return NextResponse.json({
-                data: null,
-                message: "배너를 찾을 수 없습니다"
-            }, { status: 404 });
+        if (!ObjectId.isValid(id)) {
+            return NextResponse.json(
+                { message: "유효하지 않은 ID입니다." },
+                { status: 400 }
+            );
         }
+
+        const existingBanner = await db.banner.findUnique({
+            where: { id },
+        });
+
+        if (!existingBanner) {
+            return NextResponse.json(
+                { message: "배너를 찾을 수 없습니다." },
+                { status: 404 }
+            );
+        }
+
         const deletedBanner = await db.banner.delete({
-            where: {
-                id
-            },
-        })
+            where: { id },
+        });
+
         return NextResponse.json(deletedBanner);
     } catch (error) {
-        console.log(error);
+        console.error(error);
         return NextResponse.json(
             {
                 message: "배너 삭제 실패",
-                error,
+                error: error.message,
             },
             { status: 500 }
         );
