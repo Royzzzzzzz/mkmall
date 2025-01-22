@@ -71,7 +71,7 @@ export default async function ProductDetailPage({ params: { slug } }) {
 
                 <div className="col-span-3 sm:block overflow-hidden bg-white border border-gray-300 rounded-lg shadow dark:bg-gray-700 dark:border-gray-700 text-slate-800 hidden">
                     <h2 className="px-6 py-3 font-semibold border-b border-gray-300 bg-slate-100 dark:border-gray-600 hover:bg-slate-50 dark:bg-slate-700 text-slate-800 dark:text-slate-100">
-                        교환 & 환불
+                        교환 환불
                     </h2>
                     <div className="p-4 ">
                         <div className="flex rounded-lg py-2 px-4 bg-orange-400 text-slate-50 items-center gap-3">
