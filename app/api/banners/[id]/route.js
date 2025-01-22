@@ -7,9 +7,23 @@ export async function GET(request, { params: { id } }) {
                 id
             },
             include: {
-                products: true
-            }
+                productRelations: { // 중간 테이블(BannerProduct) 통해 관계 조회
+                    include: { product: true }, // Product 정보 포함
+                },
+            },
         });
+        if (!banner) {
+            return NextResponse.json(
+                { message: "배너를 찾을 수 없습니다." },
+                { status: 404 }
+            );
+        }
+
+        // 반환 데이터를 형식화 (products 배열로 반환)
+        const formattedBanner = {
+            ...banner,
+            products: banner.productRelations.map((relation) => relation.product),
+        };
         return NextResponse.json(banner);
     } catch (error) {
         console.log(error);
@@ -76,6 +90,25 @@ export async function PUT(request, { params: { id } }) {
             where: { id },
             data: { title, link, imageUrl, isActive }
         })
+        // 중간 테이블 관계 업데이트
+        if (productIds && productIds.length > 0) {
+            // 기존 관계 삭제
+            await db.bannerProduct.deleteMany({
+                where: { bannerId: id },
+            });
+
+            // 새로운 관계 추가
+            await Promise.all(
+                productIds.map((productId) =>
+                    db.bannerProduct.create({
+                        data: {
+                            bannerId: id,
+                            productId,
+                        },
+                    })
+                )
+            );
+        }
         return NextResponse.json(updatedBanner);
     } catch (error) {
         console.log(error);
