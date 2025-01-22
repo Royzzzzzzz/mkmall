@@ -12,19 +12,7 @@ export async function POST(request) {
         isActive,
       },
     });
-    // 중간 테이블에 배너와 제품 관계 추가
-    if (productIds && productIds.length > 0) {
-      await Promise.all(
-        productIds.map((productId) =>
-          db.bannerProduct.create({
-            data: {
-              bannerId: newBanner.id,
-              productId,
-            },
-          })
-        )
-      );
-    }
+    console.log(newBanner);
     return NextResponse.json(newBanner);
   } catch (error) {
     console.log(error);
