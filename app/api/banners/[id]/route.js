@@ -24,7 +24,7 @@ export async function GET(request, { params: { id } }) {
             ...banner,
             products: banner.productRelations.map((relation) => relation.product),
         };
-        return NextResponse.json(banner);
+        return NextResponse.json(formattedBanner);
     } catch (error) {
         console.log(error);
         return NextResponse.json(
