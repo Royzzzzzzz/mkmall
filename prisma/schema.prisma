@@ -26,12 +26,21 @@ model Banner{
   link String
   imageUrl String
   isActive Boolean
-  products  Product[]
+  productRelations BannerProduct[] // 중간 테이블과의 관계
   
 	createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+model BannerProduct {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  bannerId  String     @db.ObjectId
+  productId String     @db.ObjectId
 
+  banner    Banner     @relation(fields: [bannerId], references: [id])
+  product   Product    @relation(fields: [productId], references: [id])
+
+  createdAt DateTime   @default(now())
+}
 //관계
 
 // 1대 1 관계 Realationship User => Profile Relation
@@ -91,8 +100,8 @@ model Product {
   qty Int
   tags      String[]
   
-    banner         Banner?   @relation(fields: [bannerId], references: [id]) // Banner와의 관계 설정
-  bannerId       String?   @db.ObjectId // Optional로 설정 (Product가 반드시 Banner에 연결될 필요는 없음)
+   
+  bannerRelations BannerProduct[] // 중간 테이블과의 관계
 
   category   Category  @relation(fields: [categoryId], references: [id],onDelete:Cascade,onUpdate:Cascade)
   categoryId String @db.ObjectId
