@@ -1,10 +1,14 @@
+"use client";
 import Breadcrumb from "@/components/frontend/Breadcrumb";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { useSelector } from "react-redux";
 
 export default function Cart() {
+    const cartItems = useSelector((store) => store.cart);
+    console.log(cartItems);
     return (
         <div>
             <Breadcrumb />

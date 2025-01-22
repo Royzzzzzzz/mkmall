@@ -10,7 +10,8 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import DeleteBtn from "../Actions/DeleteBtn";
-export default function ActionColumn({ row, title, endpoint }) {
+import EditBtn from "../Actions/EditBtn";
+export default function ActionColumn({ row, title, endpoint, editEndpoint }) {
     const isActive = row.isActive;
     return (
         <DropdownMenu>
@@ -26,7 +27,9 @@ export default function ActionColumn({ row, title, endpoint }) {
                 <DropdownMenuItem>
                     <DeleteBtn title={title} endpoint={endpoint} />
                 </DropdownMenuItem>
-                <DropdownMenuItem>카테고리 {title}</DropdownMenuItem>
+                <DropdownMenuItem>
+                    <EditBtn title={title} editEndpoint={editEndpoint} />
+                </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     );

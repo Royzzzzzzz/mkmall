@@ -53,6 +53,16 @@ export const columns = [
     },
     {
         id: "actions",
-        cell: ({ row }) => <ActionColumn row={row} title="상품" />,
+        cell: ({ row }) => {
+            const training = row.original;
+            return (
+                <ActionColumn
+                    row={row}
+                    title="교육"
+                    editEndpoint={`trainings/update/${training.id}`}
+                    endpoint={`trainings/${training.id}`}
+                />
+            );
+        },
     },
 ];
