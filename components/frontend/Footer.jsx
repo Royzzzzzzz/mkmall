@@ -1,21 +1,43 @@
+import Image from "next/image";
 const Footer = () => {
     return (
         <section className="py-10 bg-gray-50 sm:pt-16 lg:pt-24">
             <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
                 <div className="grid grid-cols-2 md:col-span-3 lg:grid-cols-6 gap-y-16 gap-x-12">
                     <div className="col-span-2 md:col-span-3 lg:col-span-2 lg:pr-8">
-                        <img
+                        아래는 Next.js의 Image 컴포넌트를 사용하여 변환한
+                        코드입니다. 변환된 코드 javascript 복사 편집 import
+                        Image from "next/image"; // Next.js Image 컴포넌트
+                        import
+                        <Image
                             className="w-auto h-9"
                             src="/mkmall_logo.png"
-                            alt=""
+                            alt="MK Mall Logo"
+                            width={auto} // 명시적으로 설정 필요
+                            height={36} // 9 * 4
                         />
-
+                        아래는 Next.js의 Image 컴포넌트로 변환된 코드입니다.
+                        className은 Next.js Image 컴포넌트에서 직접 적용되지
+                        않으므로, 스타일은 상위 컨테이너 또는 style 속성을 통해
+                        적용해야 합니다. 변환된 코드 javascript 복사 편집 import
+                        Image from "next/image"; // Next.js Image 컴포넌트
+                        import
+                        <div style={{ width: "auto", height: "36px" }}>
+                            {" "}
+                            {/* h-9에 해당하는 height */}
+                            <Image
+                                src="/mkmall_logo.png"
+                                alt="MK Mall Logo"
+                                width={144} // 가로 크기를 명시적으로 설정 필요
+                                height={36} // 높이는 9 * 4 (h-9)
+                                priority={true} // 로고이므로 로드 우선 순위 설정
+                            />
+                        </div>
                         <p className="text-base leading-relaxed text-gray-600 mt-7">
                             Amet minim mollit non deserunt ullamco est sit
                             aliqua dolor do amet sint. Velit officia consequat
                             duis enim velit mollit.
                         </p>
-
                         <ul className="flex items-center space-x-3 mt-9">
                             <li>
                                 <a
