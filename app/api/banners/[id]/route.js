@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { db } from '@/lib/db';
 import { ObjectId } from "mongodb"; // ObjectId를 MongoDB에서 가져오기
+import db from '../../../../lib/db';
 
 export async function GET(request, { params: { id } }) {
     try {
