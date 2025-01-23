@@ -4,6 +4,7 @@ import db from '../../../../lib/db';
 
 export async function GET(request, { params: { id } }) {
     try {
+        // 1. ID의 유효성 검사
         if (!ObjectId.isValid(id)) {
             return NextResponse.json(
                 { message: "유효하지 않은 ID입니다." },
@@ -11,15 +12,19 @@ export async function GET(request, { params: { id } }) {
             );
         }
 
+        // 2. MongoDB ObjectId로 변환
+        const objectId = new ObjectId(id);
+        // 3. 배너 데이터 조회
         const banner = await db.banner.findUnique({
-            where: { id },
+            where: { id: objectId },
             include: {
                 productRelations: {
-                    include: { product: true },
+                    include: { product: true }, // Product 데이터 포함
                 },
             },
         });
 
+        // 4. 배너가 없을 경우 처리
         if (!banner) {
             return NextResponse.json(
                 { message: "배너를 찾을 수 없습니다." },
@@ -27,11 +32,22 @@ export async function GET(request, { params: { id } }) {
             );
         }
 
+        // 5. 반환 데이터를 형식화
         const formattedBanner = {
-            ...banner,
-            products: banner.productRelations.map((relation) => relation.product),
+            id: banner.id,
+            title: banner.title,
+            link: banner.link,
+            imageUrl: banner.imageUrl,
+            isActive: banner.isActive,
+            products: banner.productRelations.map((relation) => ({
+                id: relation.product.id,
+                title: relation.product.title,
+                description: relation.product.description,
+                price: relation.product.productPrice,
+            })),
         };
 
+        // 6. 클라이언트에 데이터 반환
         return NextResponse.json(formattedBanner);
     } catch (error) {
         console.error(error);
@@ -117,7 +133,7 @@ export async function PUT(request, { params: { id } }) {
                     db.bannerProduct.create({
                         data: {
                             bannerId: id,
-                            productId,
+                            productId: new ObjectId(productId),
                         },
                     })
                 )

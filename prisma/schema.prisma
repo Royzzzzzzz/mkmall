@@ -9,6 +9,7 @@ datasource db {
 
 model Banner {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  productRelations BannerProduct[]
   createdAt DateTime @db.Date
   imageUrl  String
   isActive  Boolean
@@ -18,7 +19,11 @@ model Banner {
 }
 
 model BannerProduct {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+   id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  bannerId    String   @db.ObjectId
+  productId   String   @db.ObjectId
+  banner      Banner   @relation(fields: [bannerId], references: [id])
+  product     Product  @relation(fields: [productId], references: [id])
 }
 
 model Category {
@@ -123,6 +128,7 @@ model Product {
   userId         String
   wholesalePrice Float
   wholesaleQty   BigInt
+  bannerRelations BannerProduct[] // 중간 테이블과의 관계
 }
 
 model Training {
