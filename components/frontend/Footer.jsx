@@ -13,7 +13,7 @@ const Footer = () => {
                             className="w-auto h-9"
                             src="/mkmall_logo.png"
                             alt="MK Mall Logo"
-                            width={auto} // 명시적으로 설정 필요
+                            width={36} // 명시적으로 설정 필요
                             height={36} // 9 * 4
                         />
                         아래는 Next.js의 Image 컴포넌트로 변환된 코드입니다.

@@ -1,3 +1,4 @@
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -7,149 +8,163 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Banner {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  productRelations BannerProduct[]
-  createdAt DateTime @db.Date
-  imageUrl  String
-  isActive  Boolean
-  link      String
-  title     String
-  updatedAt DateTime @db.Date
+//  title, couponCode, expiryDate
+model Coupon{
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  couponCode String
+  expiryDate DateTime
+  isActive Boolean
+	createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-model BannerProduct {
-   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  bannerId    String   @db.ObjectId
-  productId   String   @db.ObjectId
-  banner      Banner   @relation(fields: [bannerId], references: [id])
-  product     Product  @relation(fields: [productId], references: [id])
+model Banner{
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  link String
+  imageUrl String
+  isActive Boolean
+	createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
+
+//관계
+
+// 1대 1 관계 Realationship User => Profile Relation
+// 1대 다 관계 => Category => Product Relation
+// 다대 다 관계
 
 model Category {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt   DateTime @db.Date
-  description String
-  imageUrl    String
-  isActive    Boolean
-  slug        String   @unique
-  title       String
-  updatedAt   DateTime @db.Date
-}
+   id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  title      String 
+  slug       String @unique
+  imageUrl  String?
+  description String?   
+  isActive Boolean
+  products  Product[]  
+  trainings  Training[]
+  marketIds String[] @db.ObjectId
+  markets   Market[]   @relation(fields: [marketIds], references: [id])
 
-model Coupon {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  couponCode String
-  createdAt  DateTime @db.Date
-  expiryDate DateTime @db.Date
-  isActive   Boolean
-  title      String
-  updatedAt  DateTime @db.Date
-}
-
-model Farmer {
-  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
-  code               String
-  contactPerson      String
-  contactPersonPhone String
-  createdAt          DateTime @db.Date
-  email              String
-  name               String
-  notes              String
-  phone              String
-  physicalAddress    String
-  terms              String
-  updatedAt          DateTime @db.Date
-}
-
-model FarmerProfile {
-  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
-  code               String
-  contactPerson      String
-  contactPersonPhone String
-  createdAt          DateTime @db.Date
-  email              String
-  isActive           Boolean
-  landSize           Float
-  mainCrop           String
-  name               String
-  notes              String
-  phone              String
-  physicalAddress    String
-  products           String[]
-  profileImageUrl    String
-  terms              String
-  updatedAt          DateTime @db.Date
-  userId             String   @unique @db.ObjectId
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 }
 
 model Market {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  categoryIds String[]
-  createdAt   DateTime @db.Date
-  description String
-  isActive    Boolean
-  logoUrl     String
-  slug        String   @unique
-  title       String
-  updatedAt   DateTime @db.Date
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  // name        String     @unique
+  title String
+  slug       String @unique
+  logoUrl  String?
+  description String?   
+  isActive Boolean
+  
+  categoryIds String[]   @db.ObjectId
+  categories  Category[] @relation(fields: [categoryIds], references: [id])
+
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime?  @updatedAt
 }
 
-model MarketCategory {
-  id         String @id @default(auto()) @map("_id") @db.ObjectId
-  /// Field referred in an index, but found no data to define the type.
-  categoryId Json?
-  /// Field referred in an index, but found no data to define the type.
-  marketId   Json?
-
-  @@unique([marketId, categoryId])
-}
-
-model Product {
-  id             String   @id @default(auto()) @map("_id") @db.ObjectId
-  barcode        String
-  categoryId     String   @db.ObjectId
-  createdAt      DateTime @db.Date
-  description    String
-  imageUrl       String
-  isActive       Boolean
-  isWholesale    Boolean
-  productCode    String
-  productPrice   Float
-  productStock   BigInt
-  qty            BigInt
-  salePrice      Float
-  sku            String
-  slug           String   @unique
-  tags           String[]
-  title          String   @unique
-  unit           String
-  updatedAt      DateTime @db.Date
-  userId         String
+model Product { 
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  title       String    @unique
+  slug       String    @unique
+  imageUrl String?
+  description String?
+  isActive Boolean
+  isWholesale Boolean
+  sku      String?
+  barcode  String?
+  productCode  String?
+  unit  String?
+  productPrice Float
+  salePrice Float
   wholesalePrice Float
-  wholesaleQty   BigInt
-  bannerRelations BannerProduct[] // 중간 테이블과의 관계
+  wholesaleQty Int
+  productStock Int
+  qty Int
+  tags      String[]
+  
+  category   Category  @relation(fields: [categoryId], references: [id],onDelete:Cascade,onUpdate:Cascade)
+  categoryId String @db.ObjectId
+  user User @relation(fields: [userId],references: [id],onDelete:Cascade,onUpdate:Cascade)
+  userId String 
+
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime? @updatedAt
 }
+
 
 model Training {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  categoryId  String   @db.ObjectId
-  content     String
-  createdAt   DateTime @db.Date
-  description String
-  imageUrl    String
-  isActive    Boolean
-  slug        String   @unique
-  title       String   @unique
-  updatedAt   DateTime @db.Date
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  title       String    @unique
+  slug       String    @unique
+  imageUrl String?
+  description String?
+  content String?
+  isActive Boolean
+
+  category   Category  @relation(fields: [categoryId], references: [id])
+  categoryId String @db.ObjectId
+
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime? @updatedAt
 }
 
-model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime @db.Date
-  email     String   @unique
-  name      String
-  password  String
-  role      String
-  updatedAt DateTime @db.Date
+enum UserRole{
+  ADMIN
+  USER
+  FARMER
+  MODERATOR
 }
+enum Gender{
+  MALE
+  FEMALE
+}
+
+model User{
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  name String?
+  email String? @unique
+  password String
+  emailVerfied DateTime?
+
+  products Product[]
+
+  role UserRole @default(USER)
+
+  farmerProfile FarmerProfile?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+}
+
+
+model FarmerProfile{ 
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  code String
+  contactPerson String?
+  contactPersonPhone String?
+  profileImageUrl String?
+  email String
+  name String
+  notes String?
+  phone String
+  physicalAddress String?
+  terms String?
+  isActive Boolean
+  products String[]
+  landSize Float
+  mainCrop String
+
+  user User @relation(fields: [userId],references: [id],onDelete:Cascade,onUpdate:Cascade)
+  userId String @db.ObjectId @unique
+
+	createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+ 
+// ADMIN TEACHER PARENT STUDENT
