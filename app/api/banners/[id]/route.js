@@ -81,7 +81,7 @@ export async function PUT(request, { params: { id } }) {
         console.log(error);
         return NextResponse.json(
             {
-                message: "배너 업데이트 실패",
+                message: "배너 업데이트 실패입니다",
                 error,
             },
             { status: 500 }

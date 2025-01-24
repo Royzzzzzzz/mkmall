@@ -38,7 +38,7 @@ export async function GET(request) {
     console.log(error);
     return NextResponse.json(
       {
-        message: "배너 가져오기 실패",
+        message: "배너 가져오기 실패입니다",
         error,
       },
       { status: 500 }
