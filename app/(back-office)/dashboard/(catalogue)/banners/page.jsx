@@ -8,6 +8,7 @@ import { columns } from "./columns";
 
 export default async function pages() {
     const banners = await getData("banners");
+    console.log("debug banner : ", banners);
     return (
         <div>
             {/* 헤더 */}
