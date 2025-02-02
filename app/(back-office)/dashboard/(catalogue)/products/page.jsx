@@ -8,6 +8,7 @@ import DataTable from "../../../../../components/data-table-components/DataTable
 
 export default async function products() {
     const products = await getData("products");
+    console.log("debug : ", products);
     return (
         <div>
             {/* 헤더 */}
