@@ -17,9 +17,9 @@ export default async function pages() {
                 linkTitle="배너 추가"
             />
 
-            <div className="py-8">
+            {/* <div className="py-8">
                 <DataTable data={banners} columns={columns} />
-            </div>
+            </div> */}
         </div>
     );
 }
