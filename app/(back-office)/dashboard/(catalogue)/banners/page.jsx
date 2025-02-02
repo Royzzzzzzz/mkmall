@@ -9,6 +9,7 @@ import { columns } from "./columns";
 export default async function pages() {
     const banners = await getData("banners");
     console.log("debug banner : ", banners);
+    console.log("database ", process.env.DATABASE_URL);
     return (
         <div>
             {/* 헤더 */}
