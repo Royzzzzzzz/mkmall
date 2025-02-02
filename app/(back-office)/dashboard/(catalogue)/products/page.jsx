@@ -18,9 +18,9 @@ export default async function products() {
                 linkTitle="상품 추가"
             />
 
-            <div className="py-8">
+            {/* <div className="py-8">
                 <DataTable data={products} columns={columns} />
-            </div>
+            </div> */}
         </div>
     );
 }
